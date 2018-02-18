@@ -64,4 +64,3 @@ message(STATUS "=======================================================")
 
 add_subdirectory(opt)
 add_subdirectory(cpr)
-endif()
