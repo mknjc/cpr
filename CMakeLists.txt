@@ -5,11 +5,6 @@ if(POLICY CMP0048)
     cmake_policy(SET CMP0048 NEW)
 endif()
 
-# Allow use of project folders for IDEs like Visual Studio, so we
-# could organize projects into relevant folders: "cpr", "tests" & "external (libraries)".
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
-
 project(cpr CXX)
 
 if(NOT ${CMAKE_VERSION} LESS 3.2)
@@ -62,20 +57,11 @@ message(STATUS "C++ Requests CMake Options")
 message(STATUS "=======================================================")
 cpr_option(USE_SYSTEM_CURL
     "If ON, this project will look in the system paths for an installed curl library" OFF)
-cpr_option(BUILD_CPR_TESTS "Set to ON to build cpr tests." ON)
 cpr_option(GENERATE_COVERAGE "Set to ON to generate coverage reports." OFF)
 cpr_option(CPR_CURL_NOSIGNAL "Set to ON to disable use of signals in libcurl." OFF)
-cpr_option(USE_SYSTEM_GTEST
-    "If ON, this project will look in the system paths for an installed gtest library" OFF)
 cpr_option(CMAKE_USE_OPENSSL "Use OpenSSL code. Experimental" ON)
 message(STATUS "=======================================================")
 
-if(BUILD_CPR_TESTS)
-    enable_testing()
-endif()
-
 add_subdirectory(opt)
 add_subdirectory(cpr)
-if(BUILD_CPR_TESTS)
-    add_subdirectory(test)
 endif()
